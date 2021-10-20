@@ -8,12 +8,14 @@ public class CharacterController : MonoBehaviour
     public float fuerzaSalto;
     public float saltosMaximos;
     public LayerMask capaSuelo;
+    
 
     private Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider;
     private bool mirandoDerecha = true;
     private float saltosRestantes;
     private Animator animator;
+    private bool jump;
     // Start is called before the first frame update
    private void Start()
     {
@@ -21,6 +23,7 @@ public class CharacterController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         saltosRestantes = saltosMaximos;
         animator = GetComponent<Animator>();
+      
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class CharacterController : MonoBehaviour
     {
         ProcesarMovimiento();
         ProcesarSalto();
+
     }
   
     bool EstaEnSuelo()
@@ -43,6 +47,7 @@ public class CharacterController : MonoBehaviour
         }
      if (Input.GetKeyDown(KeyCode.Space) && saltosRestantes >0)
         {
+            jump = true;
             saltosRestantes = saltosRestantes - 1;
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0f);
             rigidBody.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
@@ -73,4 +78,15 @@ public class CharacterController : MonoBehaviour
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
     }
+
+public void enemyJump()
+    
+    {
+        jump = true;
+      
+    }    
 }
+
+
+
+

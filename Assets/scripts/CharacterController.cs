@@ -45,12 +45,12 @@ public class CharacterController : MonoBehaviour
         {
             saltosRestantes = saltosMaximos;
         }
-     if (Input.GetKeyDown(KeyCode.Space) && saltosRestantes >0)
+        if (Input.GetKeyDown(KeyCode.Space) && saltosRestantes > 0)
         {
-            jump = true;
             saltosRestantes = saltosRestantes - 1;
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0f);
             rigidBody.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
+            jump = false;
         }
     }
     void ProcesarMovimiento()
@@ -79,13 +79,21 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-public void enemyJump()
+public void EnemyJump()
     
     {
         jump = true;
       
     }    
+
+   public void EnemyKnockBackk(float enemyPosX)
+    {
+        jump = true;
+        float side = Mathf.Sign(enemyPosX - transform.position.x);
+        rigidBody.AddForce(Vector2.left * side * fuerzaSalto, ForceMode2D.Impulse);
+    }
 }
+
 
 
 

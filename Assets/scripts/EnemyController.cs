@@ -47,6 +47,10 @@ public class EnemyController : MonoBehaviour
                 col.SendMessage("EnemyJump");
                 Destroy(gameObject);
             }
+            else
+            {
+                col.SendMessage("EnemyKnockBack", transform.position.x);
+            }
         }
     }   
 }
